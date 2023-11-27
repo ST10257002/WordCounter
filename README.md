@@ -33,4 +33,9 @@ The stone-age update.
 - Menubar item to open github repository in browser: `Documentation`
 - Menubar item to display software information: `About`
 - Always on-top toggle button functionality.
-- `app.Factor.java` class to parse text details.
+- `Factor.java` class to parse textbox contents and update table.
+- `Symbol.java` class to define character codes of recognised symbols.
+- `IDefinition.java` interface to enforce code structure.
+- JavaDoc: Symbol.define()
+- JavaDoc: Factor.calculateTime()
+- JavaDoc: Factor.getTable()
