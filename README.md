@@ -22,20 +22,27 @@ The aesthetic overhaul update.
 - Graphical user interface concept design.
     - Uses the FlatLaf IntelliJ themes to style native Swing components.
 
-### (next)
+### (pre-0.2.0)
 
 The stone-age update.
 
 **Added**
 
-- Menubar item to reset the textbox: `Clear`
-- Menubar item to copy textbox contents to system clipboard: `Copy (Textbox)`
-- Menubar item to open github repository in browser: `Documentation`
-- Menubar item to display software information: `About`
+- Menubar item to reset the textbox.
+- Menubar item to copy textbox contents to system clipboard.
+- Menubar item to open github repository in browser.
+- Menubar item to display software information.
 - Always on-top toggle button functionality.
-- `Factor.java` class to parse textbox contents and update table.
-- `Symbol.java` class to define character codes of recognised symbols.
-- `IDefinition.java` interface to enforce code structure.
-- JavaDoc: Symbol.define()
-- JavaDoc: Factor.calculateTime()
-- JavaDoc: Factor.getTable()
+- Class: `Factor.java` to parse textbox contents and update table.
+- Class: `Symbol.java` to define character codes of recognised symbols.
+- Class: `IDefinition.java` interface to enforce code structure.
+
+**Updated**
+
+- Crude import implementations.
+
+**Documentation**
+
+- JavaDoc: `Symbol.define()`
+- JavaDoc: `Factor.calculateTime()`
+- JavaDoc: `Factor.getTable()`
