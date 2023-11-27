@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class App extends javax.swing.JFrame {
 
@@ -32,6 +33,13 @@ public class App extends javax.swing.JFrame {
 
         groupThemes = new javax.swing.ButtonGroup();
         groupControls = new javax.swing.ButtonGroup();
+        dConfig = new javax.swing.JDialog();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         textScroll = new javax.swing.JScrollPane();
         textArea = new javax.swing.JTextArea();
         infoScroll = new javax.swing.JScrollPane();
@@ -47,6 +55,7 @@ public class App extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JToolBar.Separator();
         onTop = new javax.swing.JToggleButton();
         menu = new javax.swing.JMenuBar();
+        configMenu = new javax.swing.JMenu();
         toolMenu = new javax.swing.JMenu();
         toolCopyText = new javax.swing.JMenuItem();
         toolCopyInfo = new javax.swing.JMenuItem();
@@ -55,6 +64,66 @@ public class App extends javax.swing.JFrame {
         helpMenu = new javax.swing.JMenu();
         helpDocumentation = new javax.swing.JMenuItem();
         helpAbout = new javax.swing.JMenuItem();
+
+        dConfig.setTitle("Configuration");
+        dConfig.setAlwaysOnTop(true);
+        dConfig.setLocation(new java.awt.Point(0, 0));
+        dConfig.setMinimumSize(new java.awt.Dimension(250, 250));
+        dConfig.setModal(true);
+        dConfig.setResizable(false);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10m 30s", "00:10:30", "2.5h" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Time format");
+
+        jButton2.setText("Confirm");
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/app/assets/icons8-bin-18.png"))); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setText("Information table");
+
+        javax.swing.GroupLayout dConfigLayout = new javax.swing.GroupLayout(dConfig.getContentPane());
+        dConfig.getContentPane().setLayout(dConfigLayout);
+        dConfigLayout.setHorizontalGroup(
+            dConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dConfigLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dConfigLayout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(dConfigLayout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        dConfigLayout.setVerticalGroup(
+            dConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dConfigLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(dConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(dConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addContainerGap())
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WordCounter (pre-0.1.0)");
@@ -179,6 +248,14 @@ public class App extends javax.swing.JFrame {
             }
         });
         toolBar.add(onTop);
+
+        configMenu.setText("Configure");
+        configMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                configMenuMouseClicked(evt);
+            }
+        });
+        menu.add(configMenu);
 
         toolMenu.setText("Tools");
 
@@ -334,8 +411,18 @@ public class App extends javax.swing.JFrame {
         infoTable.setModel(new Factor().getTable(textArea.getText()));
     }//GEN-LAST:event_textAreaCaretUpdate
 
+    private void configMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_configMenuMouseClicked
+        dConfig.setVisible(true);
+    }//GEN-LAST:event_configMenuMouseClicked
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
     // <editor-fold defaultstate="collapsed" desc="Variable Declarations">  
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu configMenu;
+    private javax.swing.JDialog dConfig;
     private javax.swing.ButtonGroup groupControls;
     private javax.swing.ButtonGroup groupThemes;
     private javax.swing.JMenuItem helpAbout;
@@ -344,6 +431,12 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> infoCombo;
     private javax.swing.JScrollPane infoScroll;
     private javax.swing.JTable infoTable;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JMenuBar menu;
