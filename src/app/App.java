@@ -2,15 +2,18 @@
 package app;
 
 import com.formdev.flatlaf.intellijthemes.FlatDarkPurpleIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatLightFlatIJTheme;
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 public class App extends javax.swing.JFrame {
+    
+    private static final Properties property = new Properties();
 
     public App() {
         initComponents();
@@ -18,8 +21,13 @@ public class App extends javax.swing.JFrame {
 
     public static void main(String args[]) {
         try {
-            FlatDarkPurpleIJTheme.setup();
-        } catch (Exception e) {
+            property.load(App.class.getClassLoader().getResourceAsStream("app.properties"));
+            // Select theme from properties configs
+            switch (property.getProperty("windowTheme")) {
+                case ("light") -> FlatLightFlatIJTheme.setup();
+                default -> FlatDarkPurpleIJTheme.setup();
+            }
+        } catch (IOException e) {
             System.err.print(e);
         }
         java.awt.EventQueue.invokeLater(() -> {
