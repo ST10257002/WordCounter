@@ -4,7 +4,9 @@ package app;
 import com.formdev.flatlaf.intellijthemes.FlatDarkPurpleIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatLightFlatIJTheme;
 import java.awt.Toolkit;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,12 +22,12 @@ public class App extends javax.swing.JFrame {
     }
 
     public static void main(String args[]) {
-        try {
-            property.load(App.class.getClassLoader().getResourceAsStream("app.properties"));
+        try (InputStream stream = new FileInputStream("src/app/config/app.properties")) {
+            property.load(stream);
             // Select theme from properties configs
             switch (property.getProperty("windowTheme")) {
                 case ("light") -> FlatLightFlatIJTheme.setup();
-                default -> FlatDarkPurpleIJTheme.setup();
+                case ("dark") -> FlatDarkPurpleIJTheme.setup();
             }
         } catch (IOException e) {
             System.err.print(e);
