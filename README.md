@@ -21,3 +21,16 @@ The aesthetic overhaul update.
 - GitHub integration using Git.
 - Graphical user interface concept design.
     - Uses the FlatLaf IntelliJ themes to style native Swing components.
+
+### (next)
+
+The stone-age update.
+
+**Added**
+
+- Menubar item to reset the textbox: `Clear`
+- Menubar item to copy textbox contents to system clipboard: `Copy (Textbox)`
+- Menubar item to open github repository in browser: `Documentation`
+- Menubar item to display software information: `About`
+- Always on-top toggle button functionality.
+- `app.Factor.java` class to parse text details.

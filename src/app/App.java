@@ -2,6 +2,10 @@
 package app;
 
 import com.formdev.flatlaf.intellijthemes.FlatDarkPurpleIJTheme;
+import java.awt.Toolkit;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 public class App extends javax.swing.JFrame {
@@ -27,10 +31,10 @@ public class App extends javax.swing.JFrame {
 
         groupThemes = new javax.swing.ButtonGroup();
         groupControls = new javax.swing.ButtonGroup();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        textScroll = new javax.swing.JScrollPane();
+        textArea = new javax.swing.JTextArea();
+        infoScroll = new javax.swing.JScrollPane();
+        infoTable = new javax.swing.JTable();
         infoCombo = new javax.swing.JComboBox<>();
         targetLabel = new javax.swing.JLabel();
         targetBar = new javax.swing.JProgressBar();
@@ -54,16 +58,21 @@ public class App extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WordCounter (pre-0.1.0)");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setTabSize(4);
-        jTextArea1.setWrapStyleWord(true);
-        jTextArea1.setMargin(new java.awt.Insets(6, 6, 6, 6));
-        jScrollPane1.setViewportView(jTextArea1);
+        textArea.setColumns(20);
+        textArea.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        textArea.setLineWrap(true);
+        textArea.setRows(5);
+        textArea.setTabSize(4);
+        textArea.setWrapStyleWord(true);
+        textArea.setMargin(new java.awt.Insets(6, 6, 6, 6));
+        textArea.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                textAreaCaretUpdate(evt);
+            }
+        });
+        textScroll.setViewportView(textArea);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        infoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -87,11 +96,11 @@ public class App extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "Statistic", "Value"
+                "Type", "Value"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false
@@ -105,12 +114,12 @@ public class App extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setFocusable(false);
-        jTable1.setShowGrid(true);
-        jTable1.setShowHorizontalLines(false);
-        jTable1.getTableHeader().setResizingAllowed(false);
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(jTable1);
+        infoTable.setFocusable(false);
+        infoTable.setShowGrid(true);
+        infoTable.setShowHorizontalLines(false);
+        infoTable.getTableHeader().setResizingAllowed(false);
+        infoTable.getTableHeader().setReorderingAllowed(false);
+        infoScroll.setViewportView(infoTable);
 
         infoCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Generic information", "Advanced analysis" }));
         infoCombo.addActionListener(new java.awt.event.ActionListener() {
@@ -186,6 +195,11 @@ public class App extends javax.swing.JFrame {
 
         toolClear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.ALT_DOWN_MASK));
         toolClear.setText("Clear");
+        toolClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toolClearActionPerformed(evt);
+            }
+        });
         toolMenu.add(toolClear);
 
         menu.add(toolMenu);
@@ -193,9 +207,19 @@ public class App extends javax.swing.JFrame {
         helpMenu.setText("Help");
 
         helpDocumentation.setText("Documentation");
+        helpDocumentation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                helpDocumentationActionPerformed(evt);
+            }
+        });
         helpMenu.add(helpDocumentation);
 
         helpAbout.setText("About");
+        helpAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                helpAboutActionPerformed(evt);
+            }
+        });
         helpMenu.add(helpAbout);
 
         menu.add(helpMenu);
@@ -208,10 +232,10 @@ public class App extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
+                .addComponent(textScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(infoScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(infoCombo, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(targetLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
@@ -235,7 +259,7 @@ public class App extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(infoCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(infoScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(targetLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -246,7 +270,7 @@ public class App extends javax.swing.JFrame {
                         .addComponent(targetBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
                         .addComponent(toolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1))
+                    .addComponent(textScroll))
                 .addContainerGap())
         );
 
@@ -255,20 +279,59 @@ public class App extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void toolCopyTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toolCopyTextActionPerformed
-        // TODO add your handling code here:
+        // Copy textbox contents to system clipboard
+        Toolkit.getDefaultToolkit()
+                .getSystemClipboard()
+                .setContents(
+                        new java.awt.datatransfer.StringSelection(textArea.getText()),
+                        null
+                );
     }//GEN-LAST:event_toolCopyTextActionPerformed
 
     private void onTopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onTopActionPerformed
-        // TODO add your handling code here:
+        // Toggle window always on-top property
+        setAlwaysOnTop(onTop.isSelected());
     }//GEN-LAST:event_onTopActionPerformed
 
     private void infoComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_infoComboActionPerformed
-        // TODO add your handling code here:
+        // 
     }//GEN-LAST:event_infoComboActionPerformed
 
     private void targetComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_targetComboActionPerformed
-        // TODO add your handling code here:
+        // 
     }//GEN-LAST:event_targetComboActionPerformed
+
+    private void toolClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toolClearActionPerformed
+        // Clear textbox contents
+        textArea.setText("");
+    }//GEN-LAST:event_toolClearActionPerformed
+
+    private void helpAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpAboutActionPerformed
+        // Display about dialog
+        JOptionPane.showMessageDialog(
+                new JFrame(), 
+                "© Matthew Pieterse (2023)", 
+                "About", 
+                JOptionPane.PLAIN_MESSAGE
+        ); 
+    }//GEN-LAST:event_helpAboutActionPerformed
+
+    private void helpDocumentationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpDocumentationActionPerformed
+        // Open github repo in default browser
+        try {
+            java.awt.Desktop
+                    .getDesktop()
+                    .browse(java.net.URI.create("https://github.com/ST10257002/WordCounter")
+                    );
+        } catch (IOException e) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }//GEN-LAST:event_helpDocumentationActionPerformed
+
+    private void textAreaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_textAreaCaretUpdate
+        // Update table upon text update
+        infoTable.setModel(new Factor().getTable(textArea.getText()));
+    }//GEN-LAST:event_textAreaCaretUpdate
 
     // <editor-fold defaultstate="collapsed" desc="Variable Declarations">  
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -278,18 +341,18 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JMenuItem helpDocumentation;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JComboBox<String> infoCombo;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane infoScroll;
+    private javax.swing.JTable infoTable;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator4;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JMenuBar menu;
     private javax.swing.JToggleButton onTop;
     private javax.swing.JProgressBar targetBar;
     private javax.swing.JComboBox<String> targetCombo;
     private javax.swing.JLabel targetLabel;
     private javax.swing.JSpinner targetSpinner;
+    private javax.swing.JTextArea textArea;
+    private javax.swing.JScrollPane textScroll;
     private javax.swing.JToggleButton themeDark;
     private javax.swing.JToggleButton themeLight;
     private javax.swing.JToolBar toolBar;
