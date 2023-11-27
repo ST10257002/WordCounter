@@ -25,7 +25,7 @@ public class Factor {
             {"UpperCase", getLettersUpper(s)},
             {"LowerCase", getLettersLower(s)},
             {"Numbers", getDigits(s)},
-            {"Symbols", },
+            {"Symbols", getSymbols(s)},
             {"Spaces", getSpaces(s)},
             {"Paragraphs", getParagraphs(s)},
             {"Pages", getPageCounts(s)},
