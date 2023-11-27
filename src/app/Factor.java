@@ -8,7 +8,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class Factor {
     
-    public DefaultTableModel getTable(String s) {
+    public static DefaultTableModel getTable(String s) {
         String[] gridHeader = {"Type", "Value"};
         Object[][] gridData = {
             {"Length", getTotal(s)},
@@ -35,11 +35,11 @@ public class Factor {
         return new DefaultTableModel(gridData, gridHeader);
     }
     
-    public int getTotal(String text) {
+    public static int getTotal(String text) {
         return text.length();
     }
     
-    public int getWords(String text) {
+    public static int getWords(String text) {
         return (
             text.trim().isEmpty() 
                 ? 0 
@@ -47,7 +47,7 @@ public class Factor {
         );
     }
     
-    public int getWordsUnique(String text) {
+    public static int getWordsUnique(String text) {
         String[] array = text.split("\\s+");
         Arrays.sort(array);
         int count = 0;
@@ -61,7 +61,7 @@ public class Factor {
         return count;
     }
     
-    public int getCharacters(String text) {
+    public static int getCharacters(String text) {
         int count = 0;
         for (char c : text.toCharArray()) {
             if (!Character.isWhitespace(c)) {
@@ -71,7 +71,7 @@ public class Factor {
         return count;
     }
     
-    public int getSpaces(String text) {
+    public static int getSpaces(String text) {
         int count = 0;
         for (char c : text.toCharArray()) {
             if (Character.isWhitespace(c)) {
@@ -81,7 +81,7 @@ public class Factor {
         return count;
     }
     
-    public int getSymbols(String text) {
+    public static int getSymbols(String text) {
         Symbol s = new Symbol();
         int[] symbols = s.define();
         int count = 0;
@@ -94,23 +94,23 @@ public class Factor {
         return count;
     }
     
-    public int getLetters(String text) {
+    public static int getLetters(String text) {
         return text.replaceAll("[^A-Za-z]", "").length();
     }
     
-    public int getLettersUpper(String text) {
+    public static int getLettersUpper(String text) {
         return text.replaceAll("[^A-Z]", "").length();
     }
     
-    public int getLettersLower(String text) {
+    public static int getLettersLower(String text) {
         return text.replaceAll("[^a-z]", "").length();
     }
     
-    public int getDigits(String text) {
+    public static int getDigits(String text) {
         return text.replaceAll("[^0-9]", "").length();
     }
     
-    public int getParagraphs(String text) {
+    public static int getParagraphs(String text) {
         String[] paragraphs = text.split("\n\n|\r\n\r\n");
         if (!text.isBlank()) {
             return paragraphs.length;
@@ -118,11 +118,11 @@ public class Factor {
         return 0;
     }
     
-    public int getPageCounts(String text) {
+    public static int getPageCounts(String text) {
         return ((int) Math.floor(getWords(text) / 250));
     }
     
-    public int getSentences(String text) {
+    public static int getSentences(String text) {
         String[] paragraphs = text.split("[.?!]");
         if (!text.isBlank()) {
             return paragraphs.length;
@@ -130,7 +130,18 @@ public class Factor {
         return 0;
     }
     
-    public String calculateTime(String text, int speed) {
+    /**
+     * Calculates time taken for a human to perform an action.
+     * <p><b>Example:</b>
+     * <p>If a human can write 40 words per minute ->
+     * <p>calculateTime(string, 40);
+     * 
+     * @param text
+     * @param speed
+     * @return The minutes and seconds as a string.
+     */
+    
+    public static String calculateTime(String text, int speed) {
         double word = Double.valueOf(getWords(text));
         double time = word / speed;
         int minutes = (int) Math.floor(word / 200);

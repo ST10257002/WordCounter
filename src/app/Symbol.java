@@ -6,14 +6,14 @@ package app;
 public class Symbol implements IDefinition {
     
     /**
-     * Defines an array of character codes associated with this reference type.
+     * Defines an array of charCodes codes associated with this reference type.
      * 
      * @return 
      */
 
     @Override
     public int[] define() {
-        int[] character = {
+        int[] charCodes = {
             33,  // !
             34,  // "
             35,  // #
@@ -70,6 +70,6 @@ public class Symbol implements IDefinition {
             191, // ¿
             247, // ÷
         };    
-        return character;
+        return charCodes;
     }
 }
