@@ -14,7 +14,6 @@ public class Factor {
      * @param s string
      * @return DefaultTableModel(gridData, gridHeader)
      */
-    
     public static DefaultTableModel getTable(String s) {
         String[] gridHeader = {"Type", "Value"};
         Object[][] gridData = {
@@ -144,7 +143,6 @@ public class Factor {
      * @param speed words per second
      * @return The minutes and seconds as a string.
      */
-    
     public static String calculateTime(String text, int speed) {
         double word = Double.valueOf(getWords(text));
         double time = word / speed;
