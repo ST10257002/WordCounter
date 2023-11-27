@@ -140,8 +140,8 @@ public class Factor {
     /**
      * Calculates time taken for a human to perform an action.
      * 
-     * @param text passed as string
-     * @param speed measured in words per second
+     * @param text String()
+     * @param speed words per second
      * @return The minutes and seconds as a string.
      */
     
