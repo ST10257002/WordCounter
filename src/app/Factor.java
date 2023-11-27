@@ -8,6 +8,13 @@ import javax.swing.table.DefaultTableModel;
 
 public class Factor {
     
+    /**
+     * Creates a table model for the JTable component.
+     * 
+     * @param s string
+     * @return DefaultTableModel(gridData, gridHeader)
+     */
+    
     public static DefaultTableModel getTable(String s) {
         String[] gridHeader = {"Type", "Value"};
         Object[][] gridData = {
@@ -32,7 +39,7 @@ public class Factor {
             {"Time to speak", calculateTime(s, 150)},
             {"Time to write", calculateTime(s, 40)}
         };
-        return new DefaultTableModel(gridData, gridHeader);
+        return new DefaultTableModel(gridData, gridHeader); Factor.
     }
     
     public static int getTotal(String text) {
