@@ -5,8 +5,10 @@ import com.formdev.flatlaf.intellijthemes.FlatDarkPurpleIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatLightFlatIJTheme;
 import java.awt.Toolkit;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,11 +46,11 @@ public class App extends javax.swing.JFrame {
         groupThemes = new javax.swing.ButtonGroup();
         groupControls = new javax.swing.ButtonGroup();
         dConfig = new javax.swing.JDialog();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        dConfigTimeCombo = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        dConfigConfirm = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
+        dConfigUndo = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         textScroll = new javax.swing.JScrollPane();
         textArea = new javax.swing.JTextArea();
@@ -77,23 +79,28 @@ public class App extends javax.swing.JFrame {
 
         dConfig.setTitle("Configuration");
         dConfig.setAlwaysOnTop(true);
-        dConfig.setLocation(new java.awt.Point(0, 0));
+        dConfig.setLocation((java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().x + java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().width / 2 - dConfig.getWidth() / 2), (java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().y + java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().height/ 2 - dConfig.getHeight() / 2));
         dConfig.setMinimumSize(new java.awt.Dimension(250, 250));
         dConfig.setModal(true);
         dConfig.setResizable(false);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10m 30s", "00:10:30", "2.5h" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        dConfigTimeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10m 30s", "00:10:30", "2.5h" }));
+        dConfigTimeCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                dConfigTimeComboActionPerformed(evt);
             }
         });
 
         jLabel1.setText("Time format");
 
-        jButton2.setText("Confirm");
+        dConfigConfirm.setText("Confirm");
+        dConfigConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dConfigConfirmActionPerformed(evt);
+            }
+        });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/app/assets/icons8-bin-18.png"))); // NOI18N
+        dConfigUndo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/app/assets/icons8-bin-18.png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Information table");
@@ -107,14 +114,14 @@ public class App extends javax.swing.JFrame {
                 .addGroup(dConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dConfigLayout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(dConfigUndo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(dConfigConfirm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(dConfigLayout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(dConfigTimeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         dConfigLayout.setVerticalGroup(
@@ -125,18 +132,18 @@ public class App extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(dConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dConfigTimeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(dConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(dConfigConfirm)
+                    .addComponent(dConfigUndo))
                 .addContainerGap())
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("WordCounter (pre-0.1.0)");
+        setTitle("WordCounter (pre-0.2.0)");
 
         textArea.setColumns(20);
         textArea.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
@@ -425,14 +432,31 @@ public class App extends javax.swing.JFrame {
         dConfig.setVisible(true);
     }//GEN-LAST:event_configMenuMouseClicked
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void dConfigTimeComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dConfigTimeComboActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_dConfigTimeComboActionPerformed
+
+    private void dConfigConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dConfigConfirmActionPerformed
+        // Write properties to the config file
+        String path = "src/app/config/app.properties";
+        try (InputStream stream = new FileInputStream(path);
+            OutputStream output = new FileOutputStream(path)) 
+        {
+            property.load(stream);
+            property.setProperty("timeFormat", String.valueOf(dConfigTimeCombo.getSelectedIndex()));
+            property.store(output, null);
+        } catch (IOException e) {
+            System.err.print(e);
+        }
+    }//GEN-LAST:event_dConfigConfirmActionPerformed
 
     // <editor-fold defaultstate="collapsed" desc="Variable Declarations">  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu configMenu;
     private javax.swing.JDialog dConfig;
+    private javax.swing.JButton dConfigConfirm;
+    private javax.swing.JComboBox<String> dConfigTimeCombo;
+    private javax.swing.JButton dConfigUndo;
     private javax.swing.ButtonGroup groupControls;
     private javax.swing.ButtonGroup groupThemes;
     private javax.swing.JMenuItem helpAbout;
@@ -441,9 +465,6 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> infoCombo;
     private javax.swing.JScrollPane infoScroll;
     private javax.swing.JTable infoTable;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JSeparator jSeparator1;

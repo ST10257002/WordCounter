@@ -3,10 +3,16 @@ package app;
 
 // ST10257002 (MP)
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Properties;
 import javax.swing.table.DefaultTableModel;
 
 public class Factor {
+    
+    private static final Properties property = new Properties();
     
     /**
      * Creates a table model for the JTable component.
@@ -15,6 +21,14 @@ public class Factor {
      * @return DefaultTableModel(gridData, gridHeader)
      */
     public static DefaultTableModel getTable(String s) {
+        int timeFormat = 0;
+        try (InputStream stream = new FileInputStream("src/app/config/app.properties")) {
+            property.load(stream);
+            timeFormat = Integer.parseInt(property.getProperty("timeFormat"));
+        } catch (IOException e) {
+            System.err.print(e);
+        }
+        // Generate the table model
         String[] gridHeader = {"Type", "Value"};
         Object[][] gridData = {
             {"Length", getTotal(s)},
@@ -34,9 +48,9 @@ public class Factor {
             {"Avg. Word (chars)", 0},
             {"Sentence Logest", 0},
             {"Sentence Shortest", 0},
-            {"Time to read", calculateTime(s, 200)},
-            {"Time to speak", calculateTime(s, 150)},
-            {"Time to write", calculateTime(s, 40)}
+            {"Time to read", calculateTime(s, 200, timeFormat)},
+            {"Time to speak", calculateTime(s, 150, timeFormat)},
+            {"Time to write", calculateTime(s, 40, timeFormat)}
         };
         return new DefaultTableModel(gridData, gridHeader);
     }
@@ -143,12 +157,29 @@ public class Factor {
      * @param speed words per second
      * @return The minutes and seconds as a string.
      */
-    public static String calculateTime(String text, int speed) {
-        double word = Double.valueOf(getWords(text));
-        double time = word / speed;
-        int minutes = (int) Math.floor(word / 200);
-        int seconds = (int) Math.floor(((time - Math.floor(time)) * 0.60) * 100);
-        return (minutes + "m " + seconds + "s");
+    public static String calculateTime(String text, int speed, int style) {
+        switch (style) {
+            default -> {
+                double word = Double.valueOf(getWords(text));
+                double time = word / speed;
+                int minutes = (int) Math.floor(word / 200);
+                int seconds = (int) Math.floor(((time - Math.floor(time)) * 0.60) * 100);
+                return (minutes + "m " + seconds + "s");
+            }
+            case (1) -> {
+                double word = Double.valueOf(getWords(text));
+                double timeInSeconds = word / speed;
+                int hours = (int) (timeInSeconds / 3600);
+                int minutes = (int) ((timeInSeconds % 3600) / 60);
+                int seconds = (int) (timeInSeconds % 60);
+                return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+            }
+            case (2) -> {
+                double word = Double.valueOf(getWords(text));
+                double timeInHours = word / (speed * 3600); // Convert speed to words per hour
+                return String.format("%.1fh", timeInHours);
+            }
+        }
     }
 
 }
