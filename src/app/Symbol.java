@@ -3,7 +3,7 @@ package app;
 
 // ST10257002 (MP)
 
-public class Symbol implements Definition {
+public class Symbol implements IDefinition {
     
     /**
      * Defines an array of character codes associated with this reference type.

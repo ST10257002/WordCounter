@@ -81,9 +81,9 @@ public class Factor {
         return count;
     }
     
-    /*
     public int getSymbols(String text) {
-        int[] symbols = Definitions.defineSymbol();
+        Symbol s = new Symbol();
+        int[] symbols = s.define();
         int count = 0;
         for (char c : text.toCharArray()) {
             int v = (int) c;
@@ -93,7 +93,6 @@ public class Factor {
         }
         return count;
     }
-    */
     
     public int getLetters(String text) {
         return text.replaceAll("[^A-Za-z]", "").length();

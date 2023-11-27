@@ -1,6 +1,6 @@
 
 package app;
 
-public interface Definition {
+public interface IDefinition {
     int[] define();
 }
