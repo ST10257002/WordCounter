@@ -39,7 +39,7 @@ public class Factor {
             {"Time to speak", calculateTime(s, 150)},
             {"Time to write", calculateTime(s, 40)}
         };
-        return new DefaultTableModel(gridData, gridHeader); Factor.
+        return new DefaultTableModel(gridData, gridHeader);
     }
     
     public static int getTotal(String text) {
@@ -139,12 +139,9 @@ public class Factor {
     
     /**
      * Calculates time taken for a human to perform an action.
-     * <p><b>Example:</b>
-     * <p>If a human can write 40 words per minute ->
-     * <p>calculateTime(string, 40);
      * 
-     * @param text
-     * @param speed
+     * @param text passed as string
+     * @param speed measured in words per second
      * @return The minutes and seconds as a string.
      */
     
