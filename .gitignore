@@ -11,8 +11,8 @@
 .mtj.tmp/
 
 # Netbeans private files
-private.properties
-private.xml
+/nbproject/private/private.properties
+/nbproject/private/private.xml
 
 # Package Files #
 *.jar
