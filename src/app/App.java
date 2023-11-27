@@ -1,6 +1,7 @@
 
 package app;
 
+import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatDarkPurpleIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatLightFlatIJTheme;
 import java.awt.Toolkit;
@@ -28,7 +29,7 @@ public class App extends javax.swing.JFrame {
             property.load(stream);
             // Select theme from properties configs
             switch (property.getProperty("windowTheme")) {
-                case ("light") -> FlatLightFlatIJTheme.setup();
+                case ("light") -> FlatCyanLightIJTheme.setup();
                 case ("dark") -> FlatDarkPurpleIJTheme.setup();
             }
         } catch (IOException e) {
