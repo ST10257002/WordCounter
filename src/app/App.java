@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 
 public class App extends javax.swing.JFrame {
     
-    private static final String fileConfig = "src/app/config/app.properties";
+    private static final String pathConfig = "config/app.properties";
     
     private static final Properties property = new Properties();
 
@@ -26,7 +26,7 @@ public class App extends javax.swing.JFrame {
     }
 
     public static void main(String args[]) {
-        try (InputStream stream = new FileInputStream(fileConfig)) {
+        try (InputStream stream = App.class.getResourceAsStream(pathConfig)) {
             property.load(stream);
             // Select theme from properties configs
             switch (property.getProperty("windowTheme")) {
@@ -480,8 +480,7 @@ public class App extends javax.swing.JFrame {
     }
     
     private String readConfig(String key) {
-        String path = fileConfig;
-        try (InputStream stream = new FileInputStream(path)) {
+        try (InputStream stream = App.class.getResourceAsStream(pathConfig)) {
             property.load(stream);
             return property.getProperty(key);
         } catch (IOException e) {
@@ -491,9 +490,8 @@ public class App extends javax.swing.JFrame {
     }
     
     private void toConfig(String key, String value) {
-        String path = fileConfig;
-        try (InputStream stream = new FileInputStream(path);
-            OutputStream output = new FileOutputStream(path)) 
+        try (InputStream stream = App.class.getResourceAsStream(pathConfig);
+            OutputStream output = new FileOutputStream("src/app/config/app.properties")) 
         {
             property.load(stream);
             property.setProperty(key, value);
