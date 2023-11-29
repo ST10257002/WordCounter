@@ -22,7 +22,7 @@ public class App extends javax.swing.JFrame {
     
     // -- Variables
     
-    static final String configFile = "app.properties";
+    static final String configFile = "config.properties";
     
     // -- Constructors
     
