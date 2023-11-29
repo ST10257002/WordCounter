@@ -24,6 +24,9 @@ public class App extends javax.swing.JFrame {
     
     static final String configFile = "config.properties";
     
+    static String appName;
+    static String appVers;
+    
     // -- Constructors
     
     public App() {
@@ -39,6 +42,11 @@ public class App extends javax.swing.JFrame {
             case ("light") -> FlatCyanLightIJTheme.setup();
             case ("dark") -> FlatDarkPurpleIJTheme.setup();
         }
+        
+        String configVersion = "version.properties";
+        appName = Config.getProperty(configVersion, "name");
+        appVers = Config.getProperty(configVersion, "version");
+        
         
         EventQueue.invokeLater(() -> {
             new App().setVisible(true);
