@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
 public class App extends javax.swing.JFrame {
     
     private static final String pathConfig = "config/app.properties";
+    private static final String targv = System.getProperty("user.home") + File.separator + "AppData" + File.separator + "Roaming" + File.separator + "Words" + File.separator + "app.properties";
     
     private static final Properties property = new Properties();
 
@@ -32,7 +33,7 @@ public class App extends javax.swing.JFrame {
 
     public static void main(String args[]) throws IOException {
         initConfigs();
-        try (InputStream stream = App.class.getResourceAsStream(pathConfig)) {
+        try (InputStream stream = new FileInputStream(targv)) {
             property.load(stream);
             // Select theme from properties configs
             switch (property.getProperty("windowTheme")) {
@@ -486,7 +487,7 @@ public class App extends javax.swing.JFrame {
     }
     
     private String readConfig(String key) {
-        try (InputStream stream = App.class.getResourceAsStream(pathConfig)) {
+        try (InputStream stream = new FileInputStream(targv)) {
             property.load(stream);
             return property.getProperty(key);
         } catch (IOException e) {
@@ -496,7 +497,7 @@ public class App extends javax.swing.JFrame {
     }
     
     private void toConfig(String key, String value) {
-        try (InputStream stream = App.class.getResourceAsStream(pathConfig);
+        try (InputStream stream = new FileInputStream(targv);
             OutputStream output = new FileOutputStream("src/app/config/app.properties")) 
         {
             property.load(stream);
@@ -517,7 +518,6 @@ public class App extends javax.swing.JFrame {
     
     private static void initConfigs() throws IOException {
         
-        String targv = System.getProperty("user.home") + File.separator + "AppData" + File.separator + "Roaming" + File.separator + "Words" + File.separator + "app.properties";
         Path tempApp = Paths.get("src/app/config/app.properties");
         //Create the new file in correct directory
         File file = new File(targv);
