@@ -13,8 +13,6 @@ import javax.swing.table.DefaultTableModel;
 
 public class Factor {
     
-    private static final Properties property = new Properties();
-    
     /**
      * Creates a table model for the JTable component.
      * 
