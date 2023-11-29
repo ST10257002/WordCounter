@@ -51,9 +51,10 @@ public class App extends javax.swing.JFrame {
         dConfigTimeCombo = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         dConfigConfirm = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
         dConfigUndo = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
         textScroll = new javax.swing.JScrollPane();
         textArea = new javax.swing.JTextArea();
         infoScroll = new javax.swing.JScrollPane();
@@ -93,7 +94,7 @@ public class App extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Time format");
+        jLabel1.setText("Time format:");
 
         dConfigConfirm.setText("Confirm");
         dConfigConfirm.addActionListener(new java.awt.event.ActionListener() {
@@ -107,6 +108,11 @@ public class App extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Information table");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(140, 140, 140));
+        jLabel3.setText("You must change every value before saving.");
+        jLabel3.setToolTipText("");
+
         javax.swing.GroupLayout dConfigLayout = new javax.swing.GroupLayout(dConfig.getContentPane());
         dConfig.getContentPane().setLayout(dConfigLayout);
         dConfigLayout.setHorizontalGroup(
@@ -114,17 +120,20 @@ public class App extends javax.swing.JFrame {
             .addGroup(dConfigLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(dConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dConfigLayout.createSequentialGroup()
                         .addComponent(dConfigUndo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dConfigConfirm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(dConfigLayout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dConfigTimeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addGroup(dConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator3)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dConfigLayout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(dConfigTimeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())))
         );
         dConfigLayout.setVerticalGroup(
             dConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,10 +142,12 @@ public class App extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(dConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dConfigTimeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dConfigTimeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(dConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(dConfigConfirm)
@@ -443,15 +454,6 @@ public class App extends javax.swing.JFrame {
         dConfig.setVisible(true);
     }//GEN-LAST:event_configMenuMouseClicked
 
-    private void dConfigTimeComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dConfigTimeComboActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dConfigTimeComboActionPerformed
-
-    private void dConfigConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dConfigConfirmActionPerformed
-        // Write properties to the config file
-        toConfig("timeFormat", String.valueOf(dConfigTimeCombo.getSelectedIndex()));
-    }//GEN-LAST:event_dConfigConfirmActionPerformed
-
     private void themeLightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themeLightActionPerformed
         switchTheme();
     }//GEN-LAST:event_themeLightActionPerformed
@@ -459,6 +461,15 @@ public class App extends javax.swing.JFrame {
     private void themeDarkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themeDarkActionPerformed
         switchTheme();
     }//GEN-LAST:event_themeDarkActionPerformed
+
+    private void dConfigConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dConfigConfirmActionPerformed
+        // Write properties to the config file
+        toConfig("timeFormat", String.valueOf(dConfigTimeCombo.getSelectedIndex()));
+    }//GEN-LAST:event_dConfigConfirmActionPerformed
+
+    private void dConfigTimeComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dConfigTimeComboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dConfigTimeComboActionPerformed
 
     private void switchTheme() {
         if (themeLight.isSelected() && !themeDark.isSelected()) {
@@ -517,8 +528,9 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JTable infoTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JMenuBar menu;
     private javax.swing.JToggleButton onTop;
