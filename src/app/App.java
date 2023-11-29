@@ -3,49 +3,49 @@ package app;
 
 import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatDarkPurpleIJTheme;
+import java.awt.Desktop;
+
+import java.awt.EventQueue;
 import java.awt.Toolkit;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.awt.datatransfer.StringSelection;
+
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.util.Properties;
+import java.net.URI;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class App extends javax.swing.JFrame {
     
-    private static final String targv = System.getProperty("user.home") + File.separator + "AppData" + File.separator + "Roaming" + File.separator + "WordCounter" + File.separator + "app.properties";
+    // -- Variables
     
-    private static final Properties property = new Properties();
-
+    static final String configFile = "app.properties";
+    
+    // -- Constructors
+    
     public App() {
         initComponents();
     }
 
-    public static void main(String args[]) throws IOException {
-        initConfigs();
-        try (InputStream stream = new FileInputStream(targv)) {
-            property.load(stream);
-            // Select theme from properties configs
-            switch (property.getProperty("windowTheme")) {
-                case ("light") -> FlatCyanLightIJTheme.setup();
-                case ("dark") -> FlatDarkPurpleIJTheme.setup();
-            }
-        } catch (IOException e) {
-            System.err.print(e);
+    public static void main(String args[]) 
+      throws IOException {
+        
+        Config.initConfigs();
+        
+        switch (Config.getProperty(configFile, "windowTheme")) {
+            case ("light") -> FlatCyanLightIJTheme.setup();
+            case ("dark") -> FlatDarkPurpleIJTheme.setup();
         }
-        java.awt.EventQueue.invokeLater(() -> {
+        
+        EventQueue.invokeLater(() -> {
             new App().setVisible(true);
         });
     }
+    
+    // -- Components
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -94,11 +94,6 @@ public class App extends javax.swing.JFrame {
         dConfig.setResizable(false);
 
         dConfigTimeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10m 30s", "00:10:30", "2.5h" }));
-        dConfigTimeCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dConfigTimeComboActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("Time format:");
 
@@ -401,12 +396,14 @@ public class App extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    // -- Events
+    
     private void toolCopyTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toolCopyTextActionPerformed
         // Copy textbox contents to system clipboard
         Toolkit.getDefaultToolkit()
                 .getSystemClipboard()
                 .setContents(
-                        new java.awt.datatransfer.StringSelection(textArea.getText()),
+                        new StringSelection(textArea.getText()),
                         null
                 );
     }//GEN-LAST:event_toolCopyTextActionPerformed
@@ -442,10 +439,8 @@ public class App extends javax.swing.JFrame {
     private void helpDocumentationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpDocumentationActionPerformed
         // Open github repo in default browser
         try {
-            java.awt.Desktop
-                    .getDesktop()
-                    .browse(java.net.URI.create("https://github.com/ST10257002/WordCounter")
-                    );
+            String web = Config.getProperty("web.properties", "repoHome");
+            Desktop.getDesktop().browse(URI.create(web));
         } catch (IOException e) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -461,75 +456,60 @@ public class App extends javax.swing.JFrame {
     }//GEN-LAST:event_configMenuMouseClicked
 
     private void themeLightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themeLightActionPerformed
-        switchTheme();
+        try {
+            switchTheme();
+        } catch (IOException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_themeLightActionPerformed
 
     private void themeDarkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themeDarkActionPerformed
-        switchTheme();
+        try {
+            switchTheme();
+        } catch (IOException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_themeDarkActionPerformed
 
     private void dConfigConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dConfigConfirmActionPerformed
-        // Write properties to the config file
-        toConfig("timeFormat", String.valueOf(dConfigTimeCombo.getSelectedIndex()));
+        try {
+            // Write properties to the config file
+            Config.setProperty(configFile, "timeFormat", String.valueOf(dConfigTimeCombo.getSelectedIndex()));
+        } catch (IOException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_dConfigConfirmActionPerformed
 
-    private void dConfigTimeComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dConfigTimeComboActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dConfigTimeComboActionPerformed
-
-    private void switchTheme() {
-        if (themeLight.isSelected() && !themeDark.isSelected()) {
-            toConfig("windowTheme", "light");
+    // -- Auxillary
+    
+    private void switchTheme() 
+      throws IOException {
+        if (themeLight.isSelected()) {
+            Config.setProperty(configFile, "windowTheme", "light");
         } else {
-            toConfig("windowTheme", "dark");
-        }
-    }
-    
-    private String readConfig(String key) {
-        try (InputStream stream = new FileInputStream(targv)) {
-            property.load(stream);
-            return property.getProperty(key);
-        } catch (IOException e) {
-            System.err.print(e);
-        }
-        return "";
-    }
-    
-    private void toConfig(String key, String value) {
-        try (InputStream stream = new FileInputStream(targv);
-            OutputStream output = new FileOutputStream(targv)) 
-        {
-            property.load(stream);
-            property.setProperty(key, value);
-            property.store(output, null);
-        } catch (IOException e) {
-            System.err.print(e);
+            Config.setProperty(configFile, "windowTheme", "dark");
         }
     }
     
     private boolean getDefaultOfThemeLight() {
-        return ("light".equals(readConfig("windowTheme")));
+        try {
+            return Config.getProperty(configFile, "windowTheme").equals("light");
+        } catch (IOException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
     
     private boolean getDefaultOfThemeDark() {
-        return ("dark".equals(readConfig("windowTheme")));
+        try {
+            return Config.getProperty(configFile, "windowTheme").equals("dark");
+        } catch (IOException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
     }
     
-    private static void initConfigs() throws IOException {
-        
-        Path tempApp = Paths.get("src/app/config/app.properties");
-        //Create the new file in correct directory
-        File file = new File(targv);
-        if (!Files.exists(file.toPath())) {
-            // Create the new directories and file
-            file.getParentFile().mkdirs(); 
-            file.createNewFile();
-            
-            // Copy template file contents across
-            Path dropApp = file.toPath();
-            Files.copy(tempApp, dropApp, StandardCopyOption.REPLACE_EXISTING);
-        }
-    }
+    // -- Variables
     
     // <editor-fold defaultstate="collapsed" desc="Variable Declarations">  
     // Variables declaration - do not modify//GEN-BEGIN:variables
