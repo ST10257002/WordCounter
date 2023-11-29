@@ -238,7 +238,6 @@ public class App extends javax.swing.JFrame {
         themeDark.setIcon(new javax.swing.ImageIcon(getClass().getResource("/app/assets/icons8-moon-18.png"))); // NOI18N
         themeDark.setSelected(true);
         themeDark.setToolTipText("Dark theme");
-        themeDark.setEnabled(false);
         themeDark.setFocusable(false);
         themeDark.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         themeDark.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -247,7 +246,6 @@ public class App extends javax.swing.JFrame {
         groupThemes.add(themeLight);
         themeLight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/app/assets/icons8-light-18.png"))); // NOI18N
         themeLight.setToolTipText("Light theme");
-        themeLight.setEnabled(false);
         themeLight.setFocusable(false);
         themeLight.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         themeLight.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -450,6 +448,10 @@ public class App extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_dConfigConfirmActionPerformed
 
+    private void switchTheme() {
+        
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="Variable Declarations">  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu configMenu;
