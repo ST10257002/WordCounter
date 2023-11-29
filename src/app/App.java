@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
 
 public class App extends javax.swing.JFrame {
     
-    private static final String targv = System.getProperty("user.home") + File.separator + "AppData" + File.separator + "Roaming" + File.separator + "Words" + File.separator + "app.properties";
+    private static final String targv = System.getProperty("user.home") + File.separator + "AppData" + File.separator + "Roaming" + File.separator + "WordCounter" + File.separator + "app.properties";
     
     private static final Properties property = new Properties();
 
