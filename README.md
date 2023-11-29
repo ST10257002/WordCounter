@@ -49,3 +49,11 @@ The stone-age update.
 - JavaDoc: `Symbol.define()`
 - JavaDoc: `Factor.calculateTime()`
 - JavaDoc: `Factor.getTable()`
+
+### (pre-0.3.0)
+
+The iron-age advancement update.
+
+**Added**
+
+- External configuration files manager.
