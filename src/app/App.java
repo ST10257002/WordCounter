@@ -236,19 +236,30 @@ public class App extends javax.swing.JFrame {
 
         groupThemes.add(themeDark);
         themeDark.setIcon(new javax.swing.ImageIcon(getClass().getResource("/app/assets/icons8-moon-18.png"))); // NOI18N
-        themeDark.setSelected(true);
+        themeDark.setSelected(defaultOf_ThemeDark());
         themeDark.setToolTipText("Dark theme");
         themeDark.setFocusable(false);
         themeDark.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         themeDark.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        themeDark.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                themeDarkActionPerformed(evt);
+            }
+        });
         toolBar.add(themeDark);
 
         groupThemes.add(themeLight);
         themeLight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/app/assets/icons8-light-18.png"))); // NOI18N
+        themeLight.setSelected(defaultOf_ThemeLight());
         themeLight.setToolTipText("Light theme");
         themeLight.setFocusable(false);
         themeLight.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         themeLight.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        themeLight.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                themeLightActionPerformed(evt);
+            }
+        });
         toolBar.add(themeLight);
         toolBar.add(jSeparator4);
 
@@ -451,10 +462,31 @@ public class App extends javax.swing.JFrame {
         */
     }//GEN-LAST:event_dConfigConfirmActionPerformed
 
+    private void themeLightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themeLightActionPerformed
+        switchTheme();
+    }//GEN-LAST:event_themeLightActionPerformed
+
+    private void themeDarkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themeDarkActionPerformed
+        switchTheme();
+    }//GEN-LAST:event_themeDarkActionPerformed
+
     private void switchTheme() {
-        if (themeDark.isSelected() && !themeLight.isSelected()) {
-            
+        if (themeLight.isSelected() && !themeDark.isSelected()) {
+            toConfig("windowTheme", "light");
+        } else {
+            toConfig("windowTheme", "dark");
         }
+    }
+    
+    private String readConfig(String key) {
+        String path = "src/app/config/app.properties";
+        try (InputStream stream = new FileInputStream(path)) {
+            property.load(stream);
+            return property.getProperty(key);
+        } catch (IOException e) {
+            System.err.print(e);
+        }
+        return "";
     }
     
     private void toConfig(String key, String value) {
@@ -468,6 +500,27 @@ public class App extends javax.swing.JFrame {
         } catch (IOException e) {
             System.err.print(e);
         }
+    }
+    
+    private void setDefaultStates() {
+        switch (readConfig("windwoTheme")) {
+            case ("light") -> {
+                this.themeLight.setSelected(true);
+                this.themeDark.setSelected(false);
+            }
+            case ("dark") -> {
+                this.themeLight.setSelected(false);
+                this.themeDark.setSelected(true);
+            }
+        }
+    }
+    
+    private boolean defaultOf_ThemeLight() {
+        return ("light".equals(readConfig("windowTheme")));
+    }
+    
+    private boolean defaultOf_ThemeDark() {
+        return ("dark".equals(readConfig("windowTheme")));
     }
     
     // <editor-fold defaultstate="collapsed" desc="Variable Declarations">  

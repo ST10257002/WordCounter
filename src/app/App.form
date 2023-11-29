@@ -391,12 +391,17 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/app/assets/icons8-moon-18.png"/>
             </Property>
-            <Property name="selected" type="boolean" value="true"/>
+            <Property name="selected" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="defaultOf_ThemeDark()" type="code"/>
+            </Property>
             <Property name="toolTipText" type="java.lang.String" value="Dark theme"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="themeDarkActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JToggleButton" name="themeLight">
           <Properties>
@@ -406,11 +411,17 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/app/assets/icons8-light-18.png"/>
             </Property>
+            <Property name="selected" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="defaultOf_ThemeLight()" type="code"/>
+            </Property>
             <Property name="toolTipText" type="java.lang.String" value="Light theme"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="themeLightActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator4">
         </Component>
