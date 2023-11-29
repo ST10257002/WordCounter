@@ -2,11 +2,11 @@
 
 *.class
 
-# Log files
+# Logs
 
 *.log
 
-# NetbeansIDE files
+# NetbeansIDE
 
 nbproject/private/**
 /build/**
@@ -15,6 +15,10 @@ nbproject/private/**
 /nbdist/**
 nbactions.xml
 nb-configuration.xml
+
+# JUnitTest
+
+test*
 
 # Packages
 
