@@ -436,6 +436,8 @@ public class App extends javax.swing.JFrame {
 
     private void dConfigConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dConfigConfirmActionPerformed
         // Write properties to the config file
+        toConfig("timeFormat", String.valueOf(dConfigTimeCombo.getSelectedIndex()));
+        /*
         String path = "src/app/config/app.properties";
         try (InputStream stream = new FileInputStream(path);
             OutputStream output = new FileOutputStream(path)) 
@@ -446,10 +448,26 @@ public class App extends javax.swing.JFrame {
         } catch (IOException e) {
             System.err.print(e);
         }
+        */
     }//GEN-LAST:event_dConfigConfirmActionPerformed
 
     private void switchTheme() {
-        
+        if (themeDark.isSelected() && !themeLight.isSelected()) {
+            
+        }
+    }
+    
+    private void toConfig(String key, String value) {
+        String path = "src/app/config/app.properties";
+        try (InputStream stream = new FileInputStream(path);
+            OutputStream output = new FileOutputStream(path)) 
+        {
+            property.load(stream);
+            property.setProperty(key, value);
+            property.store(output, null);
+        } catch (IOException e) {
+            System.err.print(e);
+        }
     }
     
     // <editor-fold defaultstate="collapsed" desc="Variable Declarations">  
