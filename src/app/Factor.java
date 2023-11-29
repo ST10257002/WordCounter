@@ -1,14 +1,19 @@
 
 package app;
 
-// ST10257002 (MP)
-
 import java.io.IOException;
+
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.table.DefaultTableModel;
+
+/**
+ * Class to handle calculations.
+ * 
+ * @author matt-pieterse
+ */
 
 public class Factor {
     
