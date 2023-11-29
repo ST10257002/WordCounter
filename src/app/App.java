@@ -4,11 +4,16 @@ package app;
 import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatDarkPurpleIJTheme;
 import java.awt.Toolkit;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +30,8 @@ public class App extends javax.swing.JFrame {
         initComponents();
     }
 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws IOException {
+        initConfigs();
         try (InputStream stream = App.class.getResourceAsStream(pathConfig)) {
             property.load(stream);
             // Select theme from properties configs
@@ -156,7 +162,7 @@ public class App extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("WordCounter (pre-0.2.0)");
+        setTitle("WordCounter (pre-0.3.0)");
 
         textArea.setColumns(20);
         textArea.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
@@ -509,6 +515,23 @@ public class App extends javax.swing.JFrame {
         return ("dark".equals(readConfig("windowTheme")));
     }
     
+    private static void initConfigs() throws IOException {
+        
+        String targv = System.getProperty("user.home") + File.separator + "AppData" + File.separator + "Roaming" + File.separator + "Words" + File.separator + "app.properties";
+        Path tempApp = Paths.get("src/app/config/app.properties");
+        //Create the new file in correct directory
+        File file = new File(targv);
+        if (!Files.exists(file.toPath())) {
+            // Create the new directories and file
+            file.getParentFile().mkdirs(); 
+            file.createNewFile();
+            
+            // Copy template file contents across
+            Path dropApp = file.toPath();
+            Files.copy(tempApp, dropApp, StandardCopyOption.REPLACE_EXISTING);
+        }
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="Variable Declarations">  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu configMenu;
@@ -547,4 +570,5 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JMenu toolMenu;
     // End of variables declaration//GEN-END:variables
     // </editor-fold>    
+
 }
