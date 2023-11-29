@@ -3,7 +3,7 @@ package app;
 
 // ST10257002 (MP)
 
-public class Symbol implements IDefinition {
+public class Symbol {
     
     /**
      * Defines an array of charCodes codes associated with this reference type.
@@ -11,7 +11,6 @@ public class Symbol implements IDefinition {
      * @return 
      */
 
-    @Override
     public int[] define() {
         int[] charCodes = {
             33,  // !
