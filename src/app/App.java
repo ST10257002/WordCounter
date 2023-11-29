@@ -22,7 +22,6 @@ import javax.swing.JOptionPane;
 
 public class App extends javax.swing.JFrame {
     
-    private static final String pathConfig = "config/app.properties";
     private static final String targv = System.getProperty("user.home") + File.separator + "AppData" + File.separator + "Roaming" + File.separator + "Words" + File.separator + "app.properties";
     
     private static final Properties property = new Properties();
@@ -498,7 +497,7 @@ public class App extends javax.swing.JFrame {
     
     private void toConfig(String key, String value) {
         try (InputStream stream = new FileInputStream(targv);
-            OutputStream output = new FileOutputStream("src/app/config/app.properties")) 
+            OutputStream output = new FileOutputStream(targv)) 
         {
             property.load(stream);
             property.setProperty(key, value);
