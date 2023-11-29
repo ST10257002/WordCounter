@@ -392,7 +392,7 @@
               <Image iconType="3" name="/app/assets/icons8-moon-18.png"/>
             </Property>
             <Property name="selected" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="defaultOf_ThemeDark()" type="code"/>
+              <Connection code="getDefaultOfThemeDark()" type="code"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Dark theme"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -412,7 +412,7 @@
               <Image iconType="3" name="/app/assets/icons8-light-18.png"/>
             </Property>
             <Property name="selected" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="defaultOf_ThemeLight()" type="code"/>
+              <Connection code="getDefaultOfThemeLight()" type="code"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Light theme"/>
             <Property name="focusable" type="boolean" value="false"/>
