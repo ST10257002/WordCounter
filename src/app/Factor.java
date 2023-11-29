@@ -12,6 +12,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class Factor {
     
+    static final String configFile = "config.properties";
+    
     /**
      * Creates a table model for the JTable component.
      * 
@@ -22,7 +24,7 @@ public class Factor {
     public static DefaultTableModel getTable(String s) {
         int timeFormat = 0;
         try {
-            timeFormat = Integer.parseInt(Config.getProperty(App.configFile, "timeFormat"));
+            timeFormat = Integer.parseInt(Config.getProperty(configFile, "timeFormat"));
         } catch (IOException ex) {
             Logger.getLogger(Factor.class.getName()).log(Level.SEVERE, null, ex);
         }
