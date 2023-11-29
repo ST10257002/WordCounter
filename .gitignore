@@ -13,6 +13,7 @@
 # Netbeans private files
 /nbproject/private/private.properties
 /nbproject/private/private.xml
+/nbproject
 
 # Package Files #
 *.jar
