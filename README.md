@@ -56,4 +56,13 @@ The iron-age advancement update.
 
 **Added**
 
-- External configuration files manager.
+- `[MAJOR]` Class to handle interactions with configuration files.
+- Configuration file to handle application settings for future launches.
+- Configuration file to contain common weblinks.
+
+**Updated**
+
+- Symbols class no longer implements an interface.
+- `[MAJOR]` Vastly improved code structure and techniques.
+- Increased adoption of inline javadocs.
+- Improved gitignore implementation.

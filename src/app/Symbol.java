@@ -6,9 +6,9 @@ package app;
 public class Symbol {
     
     /**
-     * Defines an array of charCodes codes associated with this reference type.
+     * Defines an array of character codes codes associated with this reference type.
      * 
-     * @return 
+     * @return Array of valid character codes.
      */
 
     public static int[] define() {

@@ -6,8 +6,10 @@ package app;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
 import java.util.Arrays;
 import java.util.Properties;
+
 import javax.swing.table.DefaultTableModel;
 
 public class Factor {
@@ -20,6 +22,7 @@ public class Factor {
      * @param s string
      * @return DefaultTableModel(gridData, gridHeader)
      */
+    
     public static DefaultTableModel getTable(String s) {
         int timeFormat = 0;
         try (InputStream stream = new FileInputStream("src/app/config/app.properties")) {
@@ -154,8 +157,10 @@ public class Factor {
      * 
      * @param text String()
      * @param speed words per second
+     * @param style formatting (0-2)
      * @return The minutes and seconds as a string.
      */
+    
     public static String calculateTime(String text, int speed, int style) {
         switch (style) {
             default -> {
