@@ -3,12 +3,11 @@ package app;
 
 // ST10257002 (MP)
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-
 import java.util.Arrays;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -25,11 +24,10 @@ public class Factor {
     
     public static DefaultTableModel getTable(String s) {
         int timeFormat = 0;
-        try (InputStream stream = new FileInputStream("src/app/config/app.properties")) {
-            property.load(stream);
-            timeFormat = Integer.parseInt(property.getProperty("timeFormat"));
-        } catch (IOException e) {
-            System.err.print(e);
+        try {
+            timeFormat = Integer.parseInt(Config.getProperty(App.configFile, "timeFormat"));
+        } catch (IOException ex) {
+            Logger.getLogger(Factor.class.getName()).log(Level.SEVERE, null, ex);
         }
         // Generate the table model
         String[] gridHeader = {"Type", "Value"};

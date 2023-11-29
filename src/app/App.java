@@ -24,8 +24,8 @@ public class App extends javax.swing.JFrame {
     
     static final String configFile = "config.properties";
     
-    static String appName;
-    static String appVers;
+    static String appName = "dev";
+    static String appVers = "dev";
     
     // -- Constructors
     
@@ -165,7 +165,7 @@ public class App extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("WordCounter (pre-0.3.0)");
+        setTitle(appName + " (pre-" + appVers + ")");
 
         textArea.setColumns(20);
         textArea.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
