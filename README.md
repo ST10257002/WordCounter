@@ -35,7 +35,7 @@ The stone-age update.
 - Menubar item to open configuration dialog.
 - Always on-top toggle button functionality.
 - Dialog to configure application settings.
-- DYnamic theme selection on application startup.
+- Dynamic theme selection on application startup.
 - Class: `Factor.java` to parse textbox contents and update table.
 - Class: `Symbol.java` to define character codes of recognised symbols.
 - Class: `IDefinition.java` interface to enforce code structure.
