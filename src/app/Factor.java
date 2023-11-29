@@ -102,8 +102,7 @@ public class Factor {
     }
     
     public static int getSymbols(String text) {
-        Symbol s = new Symbol();
-        int[] symbols = s.define();
+        int[] symbols = Symbol.define();
         int count = 0;
         for (char c : text.toCharArray()) {
             int v = (int) c;

@@ -11,7 +11,7 @@ public class Symbol {
      * @return 
      */
 
-    public int[] define() {
+    public static int[] define() {
         int[] charCodes = {
             33,  // !
             34,  // "
