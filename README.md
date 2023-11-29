@@ -59,7 +59,7 @@ The iron-age advancement update.
 - `[MAJOR]` Class to handle interactions with configuration files.
 - Configuration file to handle application settings for future launches.
 - Configuration file to contain information regarding the current build.
-- Configuration file to contain common weblinks.
+- Configuration file to contain commonly accessed weblinks.
 
 **Updated**
 
