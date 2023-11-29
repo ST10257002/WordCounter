@@ -39,7 +39,7 @@ The stone-age update.
 
 **Updated**
 
-- Crude import implementations.
+- Verbose import implementations.
 
 **Documentation**
 
