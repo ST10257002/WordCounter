@@ -1,7 +1,6 @@
 
 package app;
 
-import java.nio.file.*;
 import org.junit.jupiter.api.*;
 
 /**
@@ -31,14 +30,7 @@ public class ConfigTest {
       throws Exception {
         
         //
-        Config.directory = Paths.get(
-                ""
-        );
-        org.junit.jupiter.api.Assertions.assertEquals(
-                true
-                , ""
-                , ""
-        );
+        org.junit.jupiter.api.Assertions.assertTrue(Config.getProperty("config.properties", "testKey").equals("success"));
     }
 
     @Test
