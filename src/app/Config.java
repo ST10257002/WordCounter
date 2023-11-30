@@ -44,7 +44,7 @@ public class Config {
     public static void initConfigs() 
       throws IOException {
         
-        String configFolder = "src/app/config/";
+        String configFolder = "src/app/configs/";
         ArrayList<Path> configFiles = new ArrayList<>();
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(configFolder), "*.properties")) {
             for (Path entry : stream) {
