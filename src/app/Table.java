@@ -16,10 +16,25 @@ public class Table {
     
     // --- Constructors
     
+    /**
+     * Creates a table model for the JTable component.
+     * <p>
+     * <i>Overloaded method uses default mode.</i>
+     * 
+     * @param text
+     * @return 
+     */
     public static DefaultTableModel getTable(String text) {
         return getTable(text, 0);
     }
     
+    /**
+     * Creates a table model for the JTable component.
+     * 
+     * @param text
+     * @param mode
+     * @return 
+     */
     public static DefaultTableModel getTable(String text, int mode) {
         switch (mode) {
             default -> {

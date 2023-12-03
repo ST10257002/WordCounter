@@ -459,10 +459,10 @@ public class App extends javax.swing.JFrame {
         String text = textArea.getText();
         switch (infoCombo.getSelectedIndex()) {
             default -> {
-                infoTable.setModel(Factor.getTable(text));
+                infoTable.setModel(Table.getTable(text));
             }
             case (1) -> { 
-                infoTable.setModel(Factor.getTable(text, 1));
+                infoTable.setModel(Table.getTable(text, 1));
             }
         }
         

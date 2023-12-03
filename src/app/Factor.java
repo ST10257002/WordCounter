@@ -2,16 +2,7 @@
 package app;
 
 import app.definitions.*;
-
-import java.io.IOException;
-
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.swing.table.DefaultTableModel;
 
 /**
  * Class to handle calculations.
@@ -22,101 +13,6 @@ import javax.swing.table.DefaultTableModel;
 public class Factor {
     
     static final String CONFIG_FILE = "config.properties";
-    
-    /**
-     * Creates a table model for the JTable component.
-     * 
-     * @param text string
-     * @param mode
-     * @return DefaultTableModel(gridData, gridHeader)
-     */
-    
-    public static DefaultTableModel getTable(String text, int mode) {
-        switch (mode) {
-            default -> {
-                return getTable_DEF(text);
-            }
-            case (1) -> {
-                return getTable_ADV(text);
-            }
-        }
-    }
-    
-    private static DefaultTableModel getTable_DEF(String text) {
-        int timeFormat = 0;
-        try {
-            timeFormat = Integer.parseInt(Config.getProperty(CONFIG_FILE, "timeFormat"));
-        } catch (IOException ex) {
-            Logger.getLogger(Factor.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        // Generate the table model
-        String[] gridHeader = {"Type", "Value"};
-        Object[][] gridData = {
-            {"Length", getTotal(text)},
-            {"Word Total", getWords(text)},
-            {"Word Unique", getWordsUnique(text)},
-            {"Characters", getCharacters(text)},
-            {"Letters", getLetters(text)},
-            {"UpperCase", getLettersUpper(text)},
-            {"LowerCase", getLettersLower(text)},
-            {"Numbers", getDigits(text)},
-            {"Symbols", getSymbols(text)},
-            {"Spaces", getSpaces(text)},
-            {"Paragraphs", getParagraphs(text)},
-            {"Pages", getPageCounts(text)},
-            {"Lines", 0},
-            {"Sentences", getSentences(text)},
-            {"Avg. Word (chars)", 0},
-            {"Sentence Logest", 0},
-            {"Sentence Shortest", 0},
-            {"Time to read", calculateTime(text, 200, timeFormat)},
-            {"Time to speak", calculateTime(text, 150, timeFormat)},
-            {"Time to write", calculateTime(text, 40, timeFormat)}
-        };
-        return new DefaultTableModel(gridData, gridHeader);
-    }
-    
-    private static DefaultTableModel getTable_ADV(String text) {
-        
-        // Generate the table model
-        String[] gridHeader = {"Word", "Frequency"};
-        Object[][] gridData = new Object[0][0];
-
-        Map<String, Integer> wordFrequencyMap = new HashMap<>();
-        String[] words = text.split("\\s+");
-
-        for (String word : words) {
-            String wordToLower = word.toLowerCase();
-            if (wordFrequencyMap.containsKey(wordToLower)) {
-                wordFrequencyMap.put(wordToLower, wordFrequencyMap.get(wordToLower) + 1);
-            } else {
-                wordFrequencyMap.put(wordToLower, 1);
-            }
-        }
-
-        gridData = new Object[wordFrequencyMap.size()][2];
-        int i = 0;
-        for (Map.Entry<String, Integer> entry : wordFrequencyMap.entrySet()) {
-            gridData[i][0] = entry.getKey();
-            gridData[i][1] = entry.getValue();
-            i++;
-        }
-
-        return new DefaultTableModel(gridData, gridHeader);
-    }
-    
-    /**
-     * Creates a table model for the JTable component.
-     * <p>
-     * <i>Overloaded method uses default mode.</i>
-     * 
-     * @param text
-     * @return 
-     */
-    
-    public static DefaultTableModel getTable(String text) {
-        return getTable(text, 0);
-    }
     
     // ---
     
