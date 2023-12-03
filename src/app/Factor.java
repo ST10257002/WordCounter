@@ -14,8 +14,6 @@ public class Factor {
     
     static final String CONFIG_FILE = "config.properties";
     
-    // ---
-    
     public static int getTotal(String text) {
         return text.length();
     }
