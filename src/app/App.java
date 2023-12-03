@@ -22,7 +22,7 @@ public class App extends javax.swing.JFrame {
     
     // -- Variables
     
-    static final String configFile = "config.properties";
+    static final String CONFIG_FILE = "config.properties";
     
     static String appName = "dev";
     static String appVers = "dev";
@@ -38,7 +38,7 @@ public class App extends javax.swing.JFrame {
         
         Config.initConfigs();
         
-        switch (Config.getProperty(configFile, "windowTheme")) {
+        switch (Config.getProperty(CONFIG_FILE, "windowTheme")) {
             case ("light") -> FlatCyanLightIJTheme.setup();
             case ("dark") -> FlatDarkPurpleIJTheme.setup();
         }
@@ -482,7 +482,7 @@ public class App extends javax.swing.JFrame {
     private void dConfigConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dConfigConfirmActionPerformed
         try {
             // Write properties to the config file
-            Config.setProperty(configFile, "timeFormat", String.valueOf(dConfigTimeCombo.getSelectedIndex()));
+            Config.setProperty(CONFIG_FILE, "timeFormat", String.valueOf(dConfigTimeCombo.getSelectedIndex()));
         } catch (IOException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -493,15 +493,15 @@ public class App extends javax.swing.JFrame {
     private void switchTheme() 
       throws IOException {
         if (themeLight.isSelected()) {
-            Config.setProperty(configFile, "windowTheme", "light");
+            Config.setProperty(CONFIG_FILE, "windowTheme", "light");
         } else {
-            Config.setProperty(configFile, "windowTheme", "dark");
+            Config.setProperty(CONFIG_FILE, "windowTheme", "dark");
         }
     }
     
     private boolean getDefaultOfThemeLight() {
         try {
-            return Config.getProperty(configFile, "windowTheme").equals("light");
+            return Config.getProperty(CONFIG_FILE, "windowTheme").equals("light");
         } catch (IOException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -510,7 +510,7 @@ public class App extends javax.swing.JFrame {
     
     private boolean getDefaultOfThemeDark() {
         try {
-            return Config.getProperty(configFile, "windowTheme").equals("dark");
+            return Config.getProperty(CONFIG_FILE, "windowTheme").equals("dark");
         } catch (IOException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
