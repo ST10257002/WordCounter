@@ -85,9 +85,9 @@ public class Table {
             {"Avg. Word (chars)", 0},
             {"Sentence Logest", 0},
             {"Sentence Shortest", 0},
-            {"Time to read", Factor.calculateTime(text, 200, timeFormat)},
-            {"Time to speak", Factor.calculateTime(text, 150, timeFormat)},
-            {"Time to write", Factor.calculateTime(text, 40, timeFormat)}
+            {"Time to read", Timer.calcTime(text, 200, timeFormat)},
+            {"Time to speak", Timer.calcTime(text, 150, timeFormat)},
+            {"Time to write", Timer.calcTime(text, 40, timeFormat)}
         };
         
         return new DefaultTableModel(gridData, gridHeader);
