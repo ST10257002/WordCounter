@@ -43,7 +43,7 @@ public class Table {
             case (0) -> {
                 return getTable_DEF(text);
             }
-            case (2) -> {
+            case (1) -> {
                 return getTable_ADV(text);
             }
         }
@@ -90,7 +90,7 @@ public class Table {
             {"Time to write", Factor.calculateTime(text, 40, timeFormat)}
         };
         
-        return new DefaultTableModel();
+        return new DefaultTableModel(gridData, gridHeader);
     }
     
     /**
