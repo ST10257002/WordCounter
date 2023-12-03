@@ -6,6 +6,8 @@ import app.definitions.*;
 import java.io.IOException;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,11 +26,23 @@ public class Factor {
     /**
      * Creates a table model for the JTable component.
      * 
-     * @param s string
+     * @param text string
+     * @param mode
      * @return DefaultTableModel(gridData, gridHeader)
      */
     
-    public static DefaultTableModel getTable(String s) {
+    public static DefaultTableModel getTable(String text, int mode) {
+        switch (mode) {
+            default -> {
+                return getTable_DEF(text);
+            }
+            case (1) -> {
+                return getTable_ADV(text);
+            }
+        }
+    }
+    
+    private static DefaultTableModel getTable_DEF(String text) {
         int timeFormat = 0;
         try {
             timeFormat = Integer.parseInt(Config.getProperty(CONFIG_FILE, "timeFormat"));
@@ -38,29 +52,72 @@ public class Factor {
         // Generate the table model
         String[] gridHeader = {"Type", "Value"};
         Object[][] gridData = {
-            {"Length", getTotal(s)},
-            {"Word Total", getWords(s)},
-            {"Word Unique", getWordsUnique(s)},
-            {"Characters", getCharacters(s)},
-            {"Letters", getLetters(s)},
-            {"UpperCase", getLettersUpper(s)},
-            {"LowerCase", getLettersLower(s)},
-            {"Numbers", getDigits(s)},
-            {"Symbols", getSymbols(s)},
-            {"Spaces", getSpaces(s)},
-            {"Paragraphs", getParagraphs(s)},
-            {"Pages", getPageCounts(s)},
+            {"Length", getTotal(text)},
+            {"Word Total", getWords(text)},
+            {"Word Unique", getWordsUnique(text)},
+            {"Characters", getCharacters(text)},
+            {"Letters", getLetters(text)},
+            {"UpperCase", getLettersUpper(text)},
+            {"LowerCase", getLettersLower(text)},
+            {"Numbers", getDigits(text)},
+            {"Symbols", getSymbols(text)},
+            {"Spaces", getSpaces(text)},
+            {"Paragraphs", getParagraphs(text)},
+            {"Pages", getPageCounts(text)},
             {"Lines", 0},
-            {"Sentences", getSentences(s)},
+            {"Sentences", getSentences(text)},
             {"Avg. Word (chars)", 0},
             {"Sentence Logest", 0},
             {"Sentence Shortest", 0},
-            {"Time to read", calculateTime(s, 200, timeFormat)},
-            {"Time to speak", calculateTime(s, 150, timeFormat)},
-            {"Time to write", calculateTime(s, 40, timeFormat)}
+            {"Time to read", calculateTime(text, 200, timeFormat)},
+            {"Time to speak", calculateTime(text, 150, timeFormat)},
+            {"Time to write", calculateTime(text, 40, timeFormat)}
         };
         return new DefaultTableModel(gridData, gridHeader);
     }
+    
+    private static DefaultTableModel getTable_ADV(String text) {
+        
+        // Generate the table model
+        String[] gridHeader = {"Word", "Frequency"};
+        Object[][] gridData = new Object[0][0];
+
+        Map<String, Integer> wordFrequencyMap = new HashMap<>();
+        String[] words = text.split("\\s+");
+
+        for (String word : words) {
+            if (wordFrequencyMap.containsKey(word)) {
+                wordFrequencyMap.put(word, wordFrequencyMap.get(word) + 1);
+            } else {
+                wordFrequencyMap.put(word, 1);
+            }
+        }
+
+        gridData = new Object[wordFrequencyMap.size()][2];
+        int i = 0;
+        for (Map.Entry<String, Integer> entry : wordFrequencyMap.entrySet()) {
+            gridData[i][0] = entry.getKey();
+            gridData[i][1] = entry.getValue();
+            i++;
+        }
+
+        return new DefaultTableModel(gridData, gridHeader);
+    }
+    
+    /**
+     * Creates a table model for the JTable component.
+     * <p>
+     * <i>Overloaded method uses default mode.</i>
+     * 
+     * @param text
+     * @return 
+     */
+    
+    public static DefaultTableModel getTable(String text) {
+        return getTable(text, 0);
+    }
+    
+    // ---
     
     public static int getTotal(String text) {
         return text.length();
