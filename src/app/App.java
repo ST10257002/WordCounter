@@ -456,7 +456,16 @@ public class App extends javax.swing.JFrame {
 
     private void textAreaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_textAreaCaretUpdate
         // Update table upon text update
-        infoTable.setModel(Factor.getTable(textArea.getText()));
+        String text = textArea.getText();
+        switch (infoCombo.getSelectedIndex()) {
+            default -> {
+                infoTable.setModel(Factor.getTable(text));
+            }
+            case (1) -> { 
+                infoTable.setModel(Factor.getTable(text, 1));
+            }
+        }
+        
     }//GEN-LAST:event_textAreaCaretUpdate
 
     private void configMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_configMenuMouseClicked

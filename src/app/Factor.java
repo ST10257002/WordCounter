@@ -86,10 +86,11 @@ public class Factor {
         String[] words = text.split("\\s+");
 
         for (String word : words) {
-            if (wordFrequencyMap.containsKey(word)) {
-                wordFrequencyMap.put(word, wordFrequencyMap.get(word) + 1);
+            String wordToLower = word.toLowerCase();
+            if (wordFrequencyMap.containsKey(wordToLower)) {
+                wordFrequencyMap.put(wordToLower, wordFrequencyMap.get(wordToLower) + 1);
             } else {
-                wordFrequencyMap.put(word, 1);
+                wordFrequencyMap.put(wordToLower, 1);
             }
         }
 
