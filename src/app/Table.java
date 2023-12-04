@@ -44,7 +44,10 @@ public class Table {
                 return getTable_DEF(text);
             }
             case (1) -> {
-                return getTable_ADV(text);
+                return getTable_WDS(text);
+            }
+            case (2) -> {
+                return getTable_LET(text);
             }
         }
     }
@@ -57,7 +60,7 @@ public class Table {
      * @param text
      * @return 
      */
-    public static DefaultTableModel getTable_DEF(String text) {
+    private static DefaultTableModel getTable_DEF(String text) {
         
         int timeFormat = 0;
         try {
@@ -99,7 +102,7 @@ public class Table {
      * @param text
      * @return 
      */
-    public static DefaultTableModel getTable_ADV(String text) {
+    private static DefaultTableModel getTable_WDS(String text) {
         
         Map<String, Integer> wordHash = new HashMap<>();
         String[] wordList = text.split("\\s+");
@@ -127,4 +130,32 @@ public class Table {
         return new DefaultTableModel(gridData, gridHeader);
     }
 
+    private static DefaultTableModel getTable_LET(String text) {
+        
+        Map<String, Integer> letterHash = new HashMap<>();
+        
+        for (char c : text.toCharArray()) {
+            if (Character.isLetter(c)) {
+                String letterLowerCase = String.valueOf(c).toLowerCase();
+                if (letterHash.containsKey(letterLowerCase)) {
+                    int countIncremented = letterHash.get(letterLowerCase) + 1;
+                    letterHash.put(letterLowerCase, countIncremented);
+                } else {
+                    letterHash.put(letterLowerCase, 1);
+                }
+            }
+        }
+        
+        String[] gridHeader = {"Letter", "Frequency"};
+        Object[][] gridData = new Object[letterHash.size()][2];
+        
+        int row = 0;
+        for (Map.Entry<String, Integer> entry : letterHash.entrySet()) {
+            gridData[row][0] = entry.getKey();
+            gridData[row][1] = entry.getValue();
+            ++row;
+        }
+        
+        return new DefaultTableModel(gridData, gridHeader);
+    }
 }

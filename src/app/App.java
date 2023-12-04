@@ -202,6 +202,12 @@ public class App extends javax.swing.JFrame {
                 {null, null},
                 {null, null},
                 {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
                 {null, null}
             },
             new String [] {
@@ -224,13 +230,14 @@ public class App extends javax.swing.JFrame {
             }
         });
         infoTable.setFocusable(false);
+        infoTable.setRowHeight(18);
         infoTable.setShowGrid(true);
         infoTable.setShowHorizontalLines(false);
         infoTable.getTableHeader().setResizingAllowed(false);
         infoTable.getTableHeader().setReorderingAllowed(false);
         infoScroll.setViewportView(infoTable);
 
-        infoCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Generic information", "Advanced analysis" }));
+        infoCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Generic text analysis", "Analysis of word occurences", "Analysis of letter occurences" }));
         infoCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 infoComboActionPerformed(evt);
@@ -385,8 +392,8 @@ public class App extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(infoCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(infoScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
+                        .addComponent(infoScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(targetLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -394,7 +401,7 @@ public class App extends javax.swing.JFrame {
                             .addComponent(targetSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(targetBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                         .addComponent(toolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(textScroll))
                 .addContainerGap())
@@ -457,15 +464,7 @@ public class App extends javax.swing.JFrame {
     private void textAreaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_textAreaCaretUpdate
         // Update table upon text update
         String text = textArea.getText();
-        switch (infoCombo.getSelectedIndex()) {
-            default -> {
-                infoTable.setModel(Table.getTable(text));
-            }
-            case (1) -> { 
-                infoTable.setModel(Table.getTable(text, 1));
-            }
-        }
-        
+        infoTable.setModel(Table.getTable(text, infoCombo.getSelectedIndex()));
     }//GEN-LAST:event_textAreaCaretUpdate
 
     private void configMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_configMenuMouseClicked

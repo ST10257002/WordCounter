@@ -256,9 +256,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="infoCombo" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="infoScroll" min="-2" pref="431" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="infoScroll" min="-2" pref="504" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="targetLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -267,7 +267,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="targetBar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="100" max="32767" attributes="0"/>
+                      <EmptySpace pref="33" max="32767" attributes="0"/>
                       <Component id="toolBar" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="textScroll" max="32767" attributes="0"/>
@@ -315,12 +315,13 @@
         <Component class="javax.swing.JTable" name="infoTable">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="2" rowCount="20">
+              <Table columnCount="2" rowCount="26">
                 <Column editable="false" title="Type" type="java.lang.String"/>
                 <Column editable="false" title="Value" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
+            <Property name="rowHeight" type="int" value="18"/>
             <Property name="showGrid" type="boolean" value="true"/>
             <Property name="showHorizontalLines" type="boolean" value="false"/>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
@@ -333,9 +334,10 @@
     <Component class="javax.swing.JComboBox" name="infoCombo">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="2">
-            <StringItem index="0" value="Generic information"/>
-            <StringItem index="1" value="Advanced analysis"/>
+          <StringArray count="3">
+            <StringItem index="0" value="Generic text analysis"/>
+            <StringItem index="1" value="Analysis of word occurences"/>
+            <StringItem index="2" value="Analysis of letter occurences"/>
           </StringArray>
         </Property>
       </Properties>
