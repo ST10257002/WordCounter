@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 import app.definitions.*;
 
-public class Delve {
+public class Parse {
     
     final static String CONFIG_FILE = "config.properties";
     
