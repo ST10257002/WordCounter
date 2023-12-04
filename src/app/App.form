@@ -233,16 +233,16 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="infoCombo" alignment="1" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="targetBar" pref="161" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="toolBar" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="targetCombo" min="-2" pref="160" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="targetSpinner" max="32767" attributes="0"/>
+                      <Component id="targetSpinner" pref="96" max="32767" attributes="0"/>
                   </Group>
                   <Component id="infoScroll" alignment="1" pref="0" max="32767" attributes="0"/>
+                  <Component id="targetBar" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -262,11 +262,10 @@
                           <Component id="targetCombo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="targetSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="81" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="toolBar" max="32767" attributes="0"/>
-                          <Component id="targetBar" max="32767" attributes="0"/>
-                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="targetBar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="61" max="32767" attributes="0"/>
+                      <Component id="toolBar" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="textScroll" max="32767" attributes="0"/>
               </Group>
@@ -375,6 +374,9 @@
           <SpinnerEditor format="" type="3"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="targetSpinnerStateChanged"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JToolBar" name="toolBar">
       <Properties>

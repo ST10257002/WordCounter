@@ -254,6 +254,11 @@ public class App extends javax.swing.JFrame {
         });
 
         targetSpinner.setEditor(new javax.swing.JSpinner.NumberEditor(targetSpinner, ""));
+        targetSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                targetSpinnerStateChanged(evt);
+            }
+        });
 
         toolBar.setRollover(true);
         toolBar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -367,14 +372,14 @@ public class App extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(infoCombo, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(targetBar, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(toolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(targetCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(targetSpinner))
-                    .addComponent(infoScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addComponent(targetSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE))
+                    .addComponent(infoScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(targetBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -390,10 +395,10 @@ public class App extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(targetCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(targetSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(toolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(targetBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(targetBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                        .addComponent(toolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(textScroll))
                 .addContainerGap())
         );
@@ -424,7 +429,7 @@ public class App extends javax.swing.JFrame {
     }//GEN-LAST:event_infoComboActionPerformed
 
     private void targetComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_targetComboActionPerformed
-        // 
+        updateProgress();
     }//GEN-LAST:event_targetComboActionPerformed
 
     private void toolClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toolClearActionPerformed
@@ -456,6 +461,7 @@ public class App extends javax.swing.JFrame {
         // Update table upon text update
         String text = textArea.getText();
         infoTable.setModel(Table.getTable(text, infoCombo.getSelectedIndex()));
+        updateProgress();
     }//GEN-LAST:event_textAreaCaretUpdate
 
     private void configMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_configMenuMouseClicked
@@ -487,7 +493,22 @@ public class App extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_dConfigConfirmActionPerformed
 
+    private void targetSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_targetSpinnerStateChanged
+        updateProgress();
+    }//GEN-LAST:event_targetSpinnerStateChanged
+
     // -- Auxillary
+    
+    private void updateProgress() {
+        int value = switch (targetCombo.getSelectedIndex()) {
+            default -> 0;
+            case (0) -> Delve.getWords(textArea.getText());
+            case (1) -> Delve.getCharacters(textArea.getText());
+            case (2) -> Delve.getPages(textArea.getText());
+        };
+        targetBar.setMaximum((int) targetSpinner.getValue());
+        targetBar.setValue(value);
+    }
     
     private void switchTheme() 
       throws IOException {
