@@ -231,19 +231,18 @@
               <Component id="textScroll" pref="1000" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="infoScroll" alignment="1" pref="0" max="32767" attributes="0"/>
                   <Component id="infoCombo" alignment="1" max="32767" attributes="0"/>
-                  <Component id="targetLabel" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="targetBar" pref="161" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="toolBar" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="targetCombo" min="-2" pref="162" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="targetCombo" min="-2" pref="160" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="targetSpinner" pref="94" max="32767" attributes="0"/>
+                      <Component id="targetSpinner" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="targetBar" alignment="0" max="32767" attributes="0"/>
+                  <Component id="infoScroll" alignment="1" pref="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -259,16 +258,15 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="infoScroll" min="-2" pref="504" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="targetLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="targetCombo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="targetSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="targetBar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="33" max="32767" attributes="0"/>
-                      <Component id="toolBar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="81" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="toolBar" max="32767" attributes="0"/>
+                          <Component id="targetBar" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                   <Component id="textScroll" max="32767" attributes="0"/>
               </Group>
@@ -348,14 +346,6 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="targetLabel">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="12" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Targets (optional)"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JProgressBar" name="targetBar">
       <Properties>
         <Property name="enabled" type="boolean" value="false"/>
@@ -371,7 +361,6 @@
             <StringItem index="2" value="Pages"/>
           </StringArray>
         </Property>
-        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="targetComboActionPerformed"/>
@@ -385,7 +374,6 @@
         <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
           <SpinnerEditor format="" type="3"/>
         </Property>
-        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JToolBar" name="toolBar">
