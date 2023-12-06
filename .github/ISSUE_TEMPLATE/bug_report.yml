@@ -1,5 +1,5 @@
-name: Bug/Issue Report
-description: Send a report to help us improve your experience
+name: "Bug/Issue Report"
+description: "Send a report to help us improve your experience"
 labels: bug
 body:
 
@@ -10,9 +10,9 @@ body:
       description: |
         Fill out this checklist before sending the report to ensure that it meets our guidelines.
       options:
-        - label: I've run the application following the instructions in the documentation.
+        - label: "I've run the application following the instructions in the documentation."
           required: true
-        - label: I understand that the issue will be (ignored/closed) if I intentionally remove or skip any mandatory field.
+        - label: "I understand that the issue will be (ignored/closed) if I intentionally remove or skip any mandatory field."
           required: true
 
 #  - type: dropdown
