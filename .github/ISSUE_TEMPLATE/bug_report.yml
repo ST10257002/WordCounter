@@ -15,13 +15,12 @@ body:
         - label: I understand that the issue will be (ignored/closed) if I intentionally remove or skip any mandatory field.
           required: true
 
-body:
   - type: dropdown
     id: category
     attributes:
       label: Category
       options:
-        - Visual inconsistency/bug
+        - Visual inconsistency or bug
         - Critical functionality malfunctioning
         - General bug
     validations:
