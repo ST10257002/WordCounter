@@ -1,0 +1,18 @@
+name: Bug/Issue Report
+description: Send a report to help us improve your experience
+labels: [ bug ]
+
+body:
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: |
+        Fill out this checklist before sending the report to ensure that it meets our guidelines.
+      options:
+          - label: I've run the application following the instructions and requirements in the documentation.
+          required: true
+
+
+
