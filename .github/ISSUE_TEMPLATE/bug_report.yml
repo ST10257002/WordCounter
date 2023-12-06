@@ -30,7 +30,6 @@ body:
   - type: textarea
     attributes:
       label: Describe the bug/issue
-      description:
       placeholder: |
         A clear and concise description of the bug/issue.
       validations:
@@ -39,7 +38,6 @@ body:
     - type: textarea
       attributes:
         label: How can we reproduce this bug?
-        description:
         placeholder: |
           Steps to reproduce this bug:
           1. Go to '...'
@@ -52,7 +50,6 @@ body:
   - type: textarea
     attributes:
       label: Screenshots and recordings
-      description:
       placeholder: |
         Send us visual examples to help us solve the issue faster.
       validations:
@@ -61,7 +58,6 @@ body:
   - type: textarea
     attributes:
       label: Additional context
-      description:
       placeholder: |
         Send additional information about the bug and your environment.
       validations:
