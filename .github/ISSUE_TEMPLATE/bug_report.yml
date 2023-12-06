@@ -17,7 +17,7 @@ body:
           required: true
 
   - type: dropdown
-    id: download
+    id: category
     attributes:
       label: Category
       options:
@@ -66,6 +66,3 @@ body:
         Send additional information about the bug and your environment.
       validations:
         required: false
-
-
-
