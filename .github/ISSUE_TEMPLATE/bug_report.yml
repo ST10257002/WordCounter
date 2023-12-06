@@ -3,7 +3,6 @@ description: Send a report to help us improve your experience
 labels: [ bug ]
 
 body:
-
   - type: checkboxes
     id: checklist
     attributes:
@@ -16,6 +15,7 @@ body:
         - label: I understand that the issue will be (ignored/closed) if I intentionally remove or skip any mandatory field.
           required: true
 
+body:
   - type: dropdown
     id: category
     attributes:
