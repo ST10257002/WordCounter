@@ -27,13 +27,13 @@ body:
 #    validations:
 #      required: true
   
-  - type: textarea
-    attributes:
-      label: Describe the bug/issue
-      placeholder: |
-        A clear and concise description of the bug/issue.
-      validations:
-        required: true
+    - type: textarea
+      attributes:
+        label: Describe the bug/issue
+        placeholder: |
+          A clear and concise description of the bug/issue.
+        validations:
+          required: true
 
     - type: textarea
       attributes:
