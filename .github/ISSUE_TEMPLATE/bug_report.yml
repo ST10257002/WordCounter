@@ -1,4 +1,4 @@
-name: "Bug/Issue Report"
+name: Bug or issue report
 description: "Send a report to help us improve your experience"
 labels: bug
 body:
@@ -14,17 +14,6 @@ body:
           required: true
         - label: "I understand that the issue will be (ignored/closed) if I intentionally remove or skip any mandatory field."
           required: true
-
-#  - type: dropdown
-#    id: category
-#    attributes:
-#      label: Category
-#      options:
-#        - Visual inconsistency or bug
-#        - Critical functionality malfunctioning
-#        - General bug
-#    validations:
-#      required: true
   
   - type: textarea
     attributes:
