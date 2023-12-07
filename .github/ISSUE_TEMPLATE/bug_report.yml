@@ -8,7 +8,7 @@ body:
     attributes:
       label: Checklist
       description: |
-        Fill out this checklist before sending the report to ensure that it meets our guidelines.
+        Fill this out before sending the report to ensure that it meets our guidelines.
       options:
         - label: "I've run the application following the instructions in the documentation."
           required: true
@@ -21,6 +21,7 @@ body:
       label: Category
       description: Which feature does this issue affect?
       options:
+        - n/a
         - Issue related to UI/UX
         - General bug or unexpected behaviour
         - Critical bug impacting primary functionality
@@ -52,4 +53,16 @@ body:
     attributes:
       label: Additional context
       placeholder: |
-        Send additional information about the bug and your environment.
+        Send additional information about the bug such as context or error messages.
+
+  - type: dropdown
+    id: contributor
+    attributes:
+      label: Contribution
+      description: Are you available for contact if we need more information?
+      options:
+        - n/a
+        - Yes
+        - No
+    validations:
+      required: true
