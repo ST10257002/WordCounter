@@ -32,6 +32,8 @@ body:
       label: Describe the bug/issue
       placeholder: |
         A clear and concise description of the bug/issue that you are experiencing.
+    validations:
+      required: true
   
   - type: textarea
     attributes:
