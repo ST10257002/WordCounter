@@ -62,7 +62,7 @@ body:
       description: Are you available for contact if we need more information?
       options:
         - n/a
-        - Yes
-        - No
+        - I am available for questions
+        - Do not contact
     validations:
       required: true
