@@ -1,4 +1,4 @@
-name: Bug report
+name: Issue related to bug or unexpected behaviour
 description: Send a report to help us improve your experience
 labels: [ bug, new ]
 body:
