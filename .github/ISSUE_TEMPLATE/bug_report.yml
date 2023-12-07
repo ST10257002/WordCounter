@@ -21,8 +21,8 @@ body:
       label: Category
       options:
         - Issue related to UI/UX
-        - Critical bug impacting primary functionality
         - General bug or unexpected behaviour
+        - Critical bug impacting primary functionality
     validations:
       required: true
   
