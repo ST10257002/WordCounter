@@ -42,7 +42,7 @@ public class Timer {
         int hours = (int) Math.floor((time / 3600));
         int minutes = (int) Math.floor((time % 3600) / 60);
         int seconds = (int) Math.floor((time % 60) * 100 / 100);
-        return String.format("%02d:%02d:02d", hours, minutes, seconds);
+        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
     }
     
     private static String calcTime_HRS(String text, int speed) {

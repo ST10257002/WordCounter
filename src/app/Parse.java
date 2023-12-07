@@ -8,10 +8,6 @@ import app.definitions.*;
 
 public class Parse {
     
-    final static String CONFIG_FILE = "config.properties";
-    
-    // ---
-    
     public static int getSize(String text) {
         return text.length();
     }
