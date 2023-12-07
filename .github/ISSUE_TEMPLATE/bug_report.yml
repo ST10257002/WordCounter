@@ -24,16 +24,12 @@ body:
         - Issue related to UI/UX
         - General bug or unexpected behaviour
         - Critical bug impacting primary functionality
-    validations:
-      required: true
   
   - type: textarea
     attributes:
       label: Describe the bug/issue
       placeholder: |
         A clear and concise description of the bug/issue that you are experiencing.
-      validations:
-        required: true
   
   - type: textarea
     attributes:
