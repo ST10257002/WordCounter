@@ -63,6 +63,6 @@ body:
       options:
         - n/a
         - I am available for questions
-        - I can't help
+        - I can't help out
     validations:
       required: true
