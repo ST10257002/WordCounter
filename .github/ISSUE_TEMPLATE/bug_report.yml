@@ -14,6 +14,17 @@ body:
           required: true
         - label: "I understand that the issue will be (ignored/closed) if I intentionally remove or skip any mandatory field."
           required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Issue related to UI/UX
+        - Critical bug impacting primary functionality
+        - General bug or unexpected behaviour
+    validantions:
+      required: true
   
   - type: textarea
     attributes:
