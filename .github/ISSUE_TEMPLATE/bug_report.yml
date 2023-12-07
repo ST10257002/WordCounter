@@ -23,7 +23,7 @@ body:
         - Issue related to UI/UX
         - Critical bug impacting primary functionality
         - General bug or unexpected behaviour
-    validantions:
+    validations:
       required: true
   
   - type: textarea
