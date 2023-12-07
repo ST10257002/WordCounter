@@ -29,7 +29,7 @@ public class Timer {
     // --- Calculation methods
     
     private static String calcTime_DEF(String text, int speed) {
-        int wordCount = Parse.getWords(text);
+        int wordCount = Parser.getWords(text);
         double time = (wordCount / speed);
         int minutes = (int) Math.floor(time / 60);
         int seconds = (int) Math.floor((time - Math.floor(time) * 60) * 100);
@@ -37,7 +37,7 @@ public class Timer {
     }
     
     private static String calcTime_HMS(String text, int speed) {
-        int wordCount = Parse.getWords(text);
+        int wordCount = Parser.getWords(text);
         double time = (wordCount / (double) speed);
         int hours = (int) Math.floor((time / 3600));
         int minutes = (int) Math.floor((time % 3600) / 60);
@@ -46,7 +46,7 @@ public class Timer {
     }
     
     private static String calcTime_HRS(String text, int speed) {
-        int wordCount = Parse.getWords(text);
+        int wordCount = Parser.getWords(text);
         double time = (wordCount / (double) speed);
         time = Math.round(time * 10.0) / 10.0;
         return String.format("%.1fh", time);

@@ -502,9 +502,9 @@ public class App extends javax.swing.JFrame {
     private void updateProgress() {
         int value = switch (targetCombo.getSelectedIndex()) {
             default -> 0;
-            case (0) -> Parse.getWords(textArea.getText());
-            case (1) -> Parse.getCharacters(textArea.getText());
-            case (2) -> Parse.getPages(textArea.getText());
+            case (0) -> Parser.getWords(textArea.getText());
+            case (1) -> Parser.getCharacters(textArea.getText());
+            case (2) -> Parser.getPages(textArea.getText());
         };
         targetBar.setMaximum((int) targetSpinner.getValue());
         targetBar.setValue(value);

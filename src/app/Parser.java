@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 import app.definitions.*;
 
-public class Parse {
+public class Parser {
     
     public static int getSize(String text) {
         return text.length();
