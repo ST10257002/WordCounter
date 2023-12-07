@@ -19,6 +19,7 @@ body:
     id: category
     attributes:
       label: Category
+      description: Which feature does this issue affect?
       options:
         - Issue related to UI/UX
         - General bug or unexpected behaviour
@@ -30,13 +31,17 @@ body:
     attributes:
       label: Describe the bug/issue
       placeholder: |
-        A clear and concise description of the bug/issue.
+        A clear and concise description of the bug/issue that you are experiencing.
+      validations:
+        required: true
   
   - type: textarea
     attributes:
       label: How can we reproduce this bug?
       placeholder: |
         Step-by-step instructions to reproduce this bug.
+        1. Click on `...`
+  
   - type: textarea
     attributes:
       label: Screenshots and recordings
