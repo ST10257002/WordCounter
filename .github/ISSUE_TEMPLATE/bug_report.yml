@@ -1,0 +1,68 @@
+name: Issue related to bug or unexpected behaviour
+description: Send a report to help us improve your experience
+labels: [ bug, new ]
+body:
+  
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: |
+        Fill this out before sending the report to ensure that it meets our guidelines.
+      options:
+        - label: "I've run the application following the instructions in the documentation."
+          required: true
+        - label: "I understand that the issue will be (ignored/closed) if I intentionally remove or skip any mandatory field."
+          required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: Which feature does this issue affect?
+      options:
+        - n/a
+        - Issue related to UI/UX
+        - General bug or unexpected behaviour
+        - Critical bug impacting primary functionality
+    validations:
+      required: true
+  
+  - type: textarea
+    attributes:
+      label: Describe the bug/issue
+      placeholder: |
+        A clear and concise description of the bug/issue that you are experiencing.
+    validations:
+      required: true
+  
+  - type: textarea
+    attributes:
+      label: How can we reproduce this bug?
+      placeholder: |
+        Step-by-step instructions to reproduce this bug.
+        1. Click on `...`
+  
+  - type: textarea
+    attributes:
+      label: Screenshots and recordings
+      placeholder: |
+        Send us visual examples to help us solve the issue faster.
+  
+  - type: textarea
+    attributes:
+      label: Additional context
+      placeholder: |
+        Send additional information about the bug such as context or error messages.
+
+  - type: dropdown
+    id: contributor
+    attributes:
+      label: Contribution
+      description: Are you available for contact if we need more information?
+      options:
+        - n/a
+        - I am available for questions
+        - I can't help out
+    validations:
+      required: true
