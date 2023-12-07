@@ -24,8 +24,8 @@ body:
         - Issue related to UI/UX
         - General bug or unexpected behaviour
         - Critical bug impacting primary functionality
-      validations:
-        reqiored: true
+    validations:
+      required: true
   
   - type: textarea
     attributes:
