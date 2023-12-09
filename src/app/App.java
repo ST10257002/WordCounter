@@ -2,7 +2,7 @@
 package app;
 
 import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatDarkPurpleIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
 import java.awt.Desktop;
 
 import java.awt.EventQueue;
@@ -40,7 +40,7 @@ public class App extends javax.swing.JFrame {
         
         switch (Config.getProperty(CONFIG_FILE, "windowTheme")) {
             case ("light") -> FlatCyanLightIJTheme.setup();
-            case ("dark") -> FlatDarkPurpleIJTheme.setup();
+            case ("dark") -> FlatOneDarkIJTheme.setup();
         }
         
         String configVersion = "version.properties";
