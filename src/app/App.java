@@ -24,8 +24,8 @@ public class App extends javax.swing.JFrame {
     
     static final String CONFIG_FILE = "config.properties";
     
-    static String appName = "dev";
-    static String appVers = "dev";
+    static String appName;
+    static String appVers;
     
     // -- Constructors
     
