@@ -105,14 +105,15 @@ public class Table {
     private static DefaultTableModel getTable_WDS(String text) {
         
         Map<String, Integer> wordHash = new HashMap<>();
-        String[] wordList = text.split("\\s+");
+        String[] wordList = text.split("[—\\s+]");
 
         for (String word : wordList) {
-            String wordLowerCase = word.toLowerCase();
+            String wordTrim = word.replaceAll("^[—.,;:!?\"'-]*|[—.,;:!?\"'-]*$", "");
+            String wordLowerCase = wordTrim.toLowerCase();
             if (wordHash.containsKey(wordLowerCase)) {
                 int countIncremented = wordHash.get(wordLowerCase) + 1;
                 wordHash.put(wordLowerCase, countIncremented);
-            } else {
+            } else if (!word.isBlank()) {
                 wordHash.put(wordLowerCase, 1);
             }
         }
